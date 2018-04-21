@@ -26,7 +26,7 @@ def schedule():
 def notify():
     return jsonify({'Not' : 'Implemented'})
 
-@app.route('/remove/<int:idnum>', methods=['POST']):
+@app.route('/remove/<int:idnum>', methods=['POST'])
 def remove(idnum):
     removeMeeting(idnum)
 
