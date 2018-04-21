@@ -22,7 +22,7 @@ def schedule():
     content = request.get_json()
     return jsonify(content)
 
-@app.route('/notify', methods=['GET']):
+@app.route('/notify', methods=['GET'])
 def notify():
     return jsonify({'Not' : 'Implemented'})
 
