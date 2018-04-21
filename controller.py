@@ -34,7 +34,9 @@ def remove(idnum):
 
 @app.route('/phone', methods=['GET', 'POST'])
 def phone():
-    print(request.get_json())
+    number = request.form['From']
+    message_body = request.form['Body']
+    print(number, message_body)
     resp = MessagingResponse()
 
     # Add a message
