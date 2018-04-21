@@ -34,6 +34,12 @@ def remove(idnum):
 @app.route('/phone', methods=['GET', 'POST'])
 def phone():
     print(request.get_json())
+    resp = MessagingResponse()
+
+    # Add a message
+    resp.message("The Robots are coming! Head for the hills!")
+
+    return str(resp)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
