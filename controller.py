@@ -20,6 +20,7 @@ def start():
 @app.route('/schedule', methods=['GET', 'POST'])
 def schedule():
     content = request.get_json()
+    print(content)
     return jsonify(content)
 
 @app.route('/notify', methods=['GET'])
