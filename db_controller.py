@@ -33,6 +33,9 @@ def removeMeeting(id):
     cur.execute('DELETE FROM Schedule WHERE PersonID = ?', (id))
 
 def setRoom(content):
+    con = sqlite3.connect('schedule.db')
+    cur = con.cursor()
+    
     print(content, type(content['id']), type(content['room']))
     personID = content['id']
     roomID = content['room']
