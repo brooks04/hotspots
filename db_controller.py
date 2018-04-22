@@ -11,11 +11,7 @@ def insertMeeting(content):
     elif content['Method'] == 'Phone':
         cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer'],))
 
-<<<<<<< HEAD
-    org = cur.fetchall()[0]
-=======
     org = cur.fetchone()
->>>>>>> 19dc9d895a0020761e0b805ea4dd48db5ff4b7d9
     scheduleID = random.randrange(2000000)
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime'], org))
     for person in content['Members']:
