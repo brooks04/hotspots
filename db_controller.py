@@ -35,6 +35,16 @@ def readData():
     con = sqlite3.connect('schedule.db')
     cur = con.cursor()
 
+    cur.execute('SELECT * FROM People')
+    dat = cur.fetchall()
+    for row in dat:
+        print(row)
+
+    cur.execute('SELECT * FROM Rooms')
+    dat = cur.fetchall()
+    for row in dat:
+        print(row)    
+
     cur.execute('SELECT * FROM Schedule')
     dat = cur.fetchall()
     for row in dat:
