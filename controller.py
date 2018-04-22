@@ -20,6 +20,10 @@ def start():
     json = {'Status': 'UP'}
     return jsonify(json)
 
+@app.route('/home')
+def home():
+    return render_template('helper.html')
+
 @app.route('/schedule', methods=['GET', 'POST'])
 def schedule():
     content = request.get_json()

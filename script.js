@@ -28,11 +28,13 @@ function httpGetAsync(theUrl, callback)
 }
 
 function update(stuff) {
-    context.fillRect(50, 50, 50, 50)
+    // context.fillRect(50, 50, 50, 50)
+    context.font = "30px Arial";
+    context.fillText(stuff,10,50);
 }
 
 var id = setInterval(frame, 10);
 
 function frame() {
-    httpGetAsync("https://iothackhotspots.herokuapp.com/read", update())
+    httpGetAsync("https://iothackhotspots.herokuapp.com/rooms", update())
 }

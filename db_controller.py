@@ -63,7 +63,7 @@ def getRoomStatus():
 
     content = {}
     for row in data:
-        content[row[1]] = row[2]
+        content[row[0]] = row[2]
 
     return content
 
