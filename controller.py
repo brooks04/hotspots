@@ -41,20 +41,24 @@ def phone():
     resp = MessagingResponse()
     msg_contents = message_body.split(" ")
     msg_length = len(msg_contents)
-    if (msg_length > 0 and msg_contents[0].lower() == "schedule"):
-        if (msg_length < 4):
-            resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
-        else:
-            time = msg_contents[1]
-            requestTime = msg_contents[2]
-            newList = msg_contents[3:]
-            str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " "
-            for e in newList:
-                str1 = str1 + e + ", "
-            str1 = str1[:-2]
-            resp.message(str1)
-            
-        #resp.message("How do I schedule stuff?")
+    if (msg_length > 0):
+        task = msg_contents[0].lower()
+        if (task == "schedule"):
+            if (msg_length < 4):
+                resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
+            else:
+                time = msg_contents[1]
+                requestTime = msg_contents[2]
+                members = msg_contents[3:]
+                json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
+                insertMeeting(json)
+                str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
+                for e in members:
+                    str1 = str1 + e + ", "
+                str1 = str1[:-2]
+                resp.message(str1)
+        elif (task == "check"):
+            resp.message("Not Implemented")
     else:
         # Add a message
         resp.message("The Robots are coming! Head for the hills!")
