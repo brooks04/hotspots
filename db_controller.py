@@ -31,6 +31,7 @@ def removeMeeting(id):
     cur = con.cursor()
 
     cur.execute('DELETE FROM Schedule WHERE PersonID = ?', (id))
+    con.commit()
 
 def setRoom(content):
     con = sqlite3.connect('schedule.db')
@@ -49,6 +50,8 @@ def setRoom(content):
             cur.execute('UPDATE Rooms SET InUse = ? WHERE ID = ?', (1, roomID))
         else:
             cur.execute('UPDATE Rooms SET InUse = ? WHERE ID = ?', (0, roomID))
+
+    con.commit()
 
 
 def readData():
