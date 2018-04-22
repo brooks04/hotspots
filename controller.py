@@ -22,6 +22,7 @@ def start():
 def schedule():
     content = request.get_json()
     print(content)
+    insertMeeting(content)
     return jsonify(content)
 
 @app.route('/notify', methods=['GET'])
@@ -61,6 +62,7 @@ def phone():
 @app.route('/read')
 def read():
     readData()
+    return jsonify({'Status' : 'Read'})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
