@@ -11,9 +11,14 @@ import sqlite3
 from flask import Flask, request, make_response, Response, jsonify, render_template
 from db_controller import insertMeeting, removeMeeting, readData, setRoom, getRoomStatus
 from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import Client
 
 app = Flask(__name__)
 
+# Your Account SID from twilio.com/console
+account_sid = "ACef85ef8fc339b4d9f2cc2269a8886773"
+# Your Auth Token from twilio.com/console
+auth_token  = "781e89ea329e82e4a3b0f8e116f2a2d1"
 
 @app.route('/')
 def start():
@@ -28,7 +33,16 @@ def home():
 def schedule():
     content = request.get_json()
     print(content)
-    insertMeeting(content)
+    resp = insertMeeting(content)
+
+    client = Client(account_sid, auth_token)
+
+    for number in resp[0]:
+        message = client.messages.create(
+        to="+1" + str(number), 
+        from_="+14252233871",
+        body="You have a meeting in room " + str(resp[1]) + " at " + str(resp[2]))
+
     return jsonify(content)
 
 @app.route('/notify', methods=['GET'])

@@ -17,14 +17,18 @@ def insertMeeting(content):
     scheduleID = random.randrange(2000000)
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['RequestTime'], org))
     idList = []
+    numbers = []
     for person in content['Members']:
         cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
-        idList.append(int(cur.fetchone()[0]))
+        row = cur.fetchone()
+        idList.append(int(row[0]))
+        numbers.append(row[1])
 
     for pid in idList:
         cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, pid))
 
     con.commit()
+    return numbers, 1, content['Time']
 
 def removeMeeting(id):
     con = sqlite3.connect('schedule.db')
@@ -41,6 +45,8 @@ def setRoom(content):
     personID = content['id']
     roomID = content['room']
 
+    checkedIn = False
+
     cur.execute('SELECT * FROM Schedule WHERE RoomID = ? AND PersonID = ?', (roomID, personID))
     data = cur.fetchall()
     if len(data) > 0:
@@ -52,7 +58,6 @@ def setRoom(content):
             cur.execute('UPDATE Rooms SET InUse = ? WHERE ID = ?', (0, roomID))
 
     con.commit()
-
 
 def getRoomStatus():
     con = sqlite3.connect('schedule.db')
