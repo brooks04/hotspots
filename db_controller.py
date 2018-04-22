@@ -14,7 +14,7 @@ def insertMeeting(content):
     org = cur.fetchone()
     scheduleID = random.randrange(2000000)
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime'], org))
-    for person in content['members']:
+    for person in content['Members']:
         cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, person))
     #if content['Members'][0] == 'team':        
     #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 1))
