@@ -8,7 +8,7 @@ import json
 import requests
 import time
 import sqlite3
-from flask import Flask, request, make_response, Response, jsonify
+from flask import Flask, request, make_response, Response, jsonify, render_template
 from db_controller import insertMeeting, removeMeeting, readData, setRoom, getRoomStatus
 from twilio.twiml.messaging_response import MessagingResponse
 
