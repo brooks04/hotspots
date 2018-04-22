@@ -73,7 +73,16 @@ def phone():
                 members = msg_contents[2:]
                 json = {"Method" : "Phone", "Organizer" : int(number), "Time" : int(length), "RequestTime" : int(requestTime), "Members" : members}
                 print(json)
-                insertMeeting(json)
+                resp = insertMeeting(json)
+
+                client = Client(account_sid, auth_token)
+
+                for number in resp[0]:
+                    message = client.messages.create(
+                    to="+1" + str(number), 
+                    from_="+14252233871",
+                    body="You have a meeting in room " + str(resp[1]) + " for " + str(resp[2]) + " mins")
+
                 str1 = "Meeting queued! Length Requested = " + length + " Time of Request = " + str(int(requestTime)) + " Members = "
                 for e in members:
                     str1 = str1 + e + ", "
