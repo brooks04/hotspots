@@ -39,28 +39,30 @@ def start():
 
         # commit changes
 
-        idList = []
+        # idList = []
 
-        person = 'Alex'
-        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
-        row = cur.fetchone()
-        idList.append(int(row[0]))
+        # person = 'Alex'
+        # cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
+        # row = cur.fetchone()
+        # idList.append(int(row[0]))
         
-        person = 'Brooke'
-        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
-        row = cur.fetchone()
-        idList.append(int(row[0]))
+        # person = 'Brooke'
+        # cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
+        # row = cur.fetchone()
+        # idList.append(int(row[0]))
         
-        print(idList)
+        # print(idList)
+
+        cur.execute('ALTER TABLE Rooms ADD InUse INTEGER NOT NULL DEFAULT 0');
 
         con.commit()
         con.close()
 
         print('Good')
 
-    except sqlite3.Error:
+    except sqlite3.Error as e:
         # oh no
-        print('oh no')
+        print('oh no', e)
 
 def readData():
     print('Reading Data')
