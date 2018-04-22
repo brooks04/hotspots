@@ -7,11 +7,13 @@ import os
 import json
 import requests
 import sqlite3
+import queue
 from flask import Flask, request, make_response, Response, jsonify
 from db_controller import insertMeeting, removeMeeting, readData
 from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def start():
@@ -59,6 +61,8 @@ def phone():
                 resp.message(str1)
         elif (task == "check"):
             resp.message("Not Implemented")
+        else:
+            resp.message(task + " is not a recognized command.")
     else:
         # Add a message
         resp.message("The Robots are coming! Head for the hills!")

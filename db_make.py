@@ -6,10 +6,18 @@ def start():
 
     try:
         # create rooms table
-        cur.execute('CREATE TABLE Rooms(ID INTEGER PRIMARY KEY, Name TEXT NOT NULL)')
+        cur.execute('CREATE TABLE Rooms(\
+            ID INTEGER PRIMARY KEY, \
+            Name TEXT NOT NULL, \
+            Occupancy INTEGER, \
+            InUse INTEGER)')
 
         # create people table
-        cur.execute('CREATE TABLE People(ID TEXT PRIMARY KEY, PhoneNum INTEGER UNIQUE NOT NULL, SlackID TEXT UNIQUE NOT NULL, Name TEXT NOT NULL)')
+        cur.execute('CREATE TABLE People(\
+            ID TEXT PRIMARY KEY, \
+            PhoneNum INTEGER UNIQUE NOT NULL, \
+            SlackID TEXT UNIQUE NOT NULL, \
+            Name TEXT NOT NULL)')
 
         # create schedule table
         cur.execute('CREATE TABLE Schedule(\
