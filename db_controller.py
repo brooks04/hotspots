@@ -32,10 +32,10 @@ def readData():
 
     cur.execute('SELECT * FROM Schedule')
     dat = cur.fetchall()
-    for row in data:
+    for row in dat:
         print(row)
 
     cur.execute('SELECT * FROM Notify')
     dat = cur.fetchall()
-    for row in data:
+    for row in dat:
         print(row)
