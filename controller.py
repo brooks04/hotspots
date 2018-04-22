@@ -70,7 +70,7 @@ def read():
     readData()
     return jsonify({'Status' : 'Read'})
 
-@app.route('/checkin')
+@app.route('/checkin',  methods=['GET', 'POST'])
 def checkin():
     content = request.get_json()
     return jsonify(content)    
