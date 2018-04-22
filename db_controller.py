@@ -22,7 +22,7 @@ def insertMeeting(content):
         idList.append(int(cur.fetchone()[0]))
 
     for pid in idList:
-        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, person))
+        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, pid))
 
     con.commit()
 
