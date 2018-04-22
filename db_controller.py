@@ -14,15 +14,13 @@ def insertMeeting(content):
     org = cur.fetchone()
     scheduleID = random.randrange(2000000)
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime'], org))
+    idList = []
     for person in content['Members']:
-        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, person))
-    #if content['Members'][0] == 'team':        
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 1))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 2))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 3))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 4))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 5))
+        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%'))
+        idList.append(cur.fetchone())
 
+    for pid in idList:
+        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, person))
 
     con.commit()
 
