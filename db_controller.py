@@ -39,6 +39,7 @@ def readData():
 
     cur.execute('SELECT * FROM People')
     dat = cur.fetchall()
+    print(dat[0].keys())
     for row in dat:
         print(row)
 

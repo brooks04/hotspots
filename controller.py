@@ -77,6 +77,7 @@ def read():
 @app.route('/checkin',  methods=['GET', 'POST'])
 def checkin():
     content = request.get_json()
+    print(content)
     return jsonify(content)
 
 if __name__ == '__main__':
