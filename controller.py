@@ -7,7 +7,6 @@ import os
 import json
 import requests
 import sqlite3
-import queue
 from flask import Flask, request, make_response, Response, jsonify
 from db_controller import insertMeeting, removeMeeting, readData
 from twilio.twiml.messaging_response import MessagingResponse
@@ -77,7 +76,6 @@ def read():
 @app.route('/checkin',  methods=['GET', 'POST'])
 def checkin():
     content = request.get_json()
-    print(content)
     return jsonify(content)
 
 if __name__ == '__main__':
