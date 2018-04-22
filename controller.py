@@ -70,6 +70,11 @@ def read():
     readData()
     return jsonify({'Status' : 'Read'})
 
+@app.route('/checkin')
+def checkin():
+    content = request.get_json()
+    return jsonify(content)    
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
