@@ -48,8 +48,7 @@ def phone():
             time = msg_contents[1]
             requestTime = msg_contents[2]
             newList = msg_contents[3:]
-            resp.message("Meeting scheduled for ", time, ".  The meeting length is ",\
-                requestTime, ".  The members showing up are ", newList)
+            resp.message("Meeting scheduled for ", time, ".  The meeting length is ", requestTime, ".")
 
 
             
