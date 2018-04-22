@@ -4,7 +4,6 @@ Authors: Beebkips
 
 '''
 import os
-import time
 import json
 import requests
 import sqlite3
@@ -46,15 +45,15 @@ def phone():
     if (msg_length > 0):
         task = msg_contents[0].lower()
         if (task == "schedule"):
-            if (msg_length < 3):
-                resp.message("For scheduling meetings, please use the format \"schedule <meeting length> <member1 member2 ...>\"")
+            if (msg_length < 4):
+                resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
             else:
-                meetinglength = msg_contents[1]
-                requestTime = time.time()
-                members = msg_contents[2:]
-                json = {"Method" : "Phone", "Organizer" : number, "Time" : meetinglength, "requestTime" : requestTime, "Members" : members}
+                time = msg_contents[1]
+                requestTime = msg_contents[2]
+                members = msg_contents[3:]
+                json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
                 insertMeeting(json)
-                str1 = "Meeting scheduled! Time = " + meetinglength + " Length = " + requestTime + " Members = "
+                str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
                 for e in members:
                     str1 = str1 + e + ", "
                 str1 = str1[:-2]
@@ -77,7 +76,6 @@ def read():
 @app.route('/checkin',  methods=['GET', 'POST'])
 def checkin():
     content = request.get_json()
-    print(content)
     return jsonify(content)
 
 if __name__ == '__main__':
