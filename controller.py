@@ -48,7 +48,7 @@ def phone():
             requestTime = msg_contents[2]
             newList = msg_contents[3:]
             str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " "
-            for (e in newList):
+            for e in newList:
                 str1 = str1 + e + ", "
             str1 = str1[:-2]
             resp.message(str1)
