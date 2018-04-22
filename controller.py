@@ -38,6 +38,7 @@ def remove(idnum):
 @app.route('/phone', methods=['GET', 'POST'])
 def phone():
     number = request.form['From']
+    number = number[2:] #Removing the +1 from the start of the number
     message_body = request.form['Body']
     print(number, message_body)
     resp = MessagingResponse()
@@ -52,15 +53,19 @@ def phone():
                 length = msg_contents[1]
                 requestTime = time.time()
                 members = msg_contents[2:]
-                json = {"Method" : "Phone", "Organizer" : number, "Time" : length, "requestTime" : requestTime, "Members" : members}
+                json = {"Method" : "Phone", "Organizer" : int(number), "Time" : int(length), "RequestTime" : int(requestTime), "Members" : members}
                 insertMeeting(json)
-                str1 = "Meeting queued! Length Requested = " + length + " Time of Request = " + requestTime + " Members = "
+                str1 = "Meeting queued! Length Requested = " + length + " Time of Request = " + str(int(requestTime)) + " Members = "
                 for e in members:
                     str1 = str1 + e + ", "
                 str1 = str1[:-2]
                 resp.message(str1)
-        elif (task == "check"):
-            resp.message("Not Implemented")
+        elif (task == "remove"):
+            usernum = number
+            if (msg_length > 1):
+                usernum = msg_contents[1]
+            removeMeeting(usernum)
+            resp.message("Meeting removed for user id " + usernum)
         else:
             resp.message(task + " is not a recognized command.")
     else:
