@@ -46,8 +46,10 @@ def phone():
         else:
             time = msg_contents[1]
             requestTime = msg_contents[2]
-            newList = msg_contents[3:]
-            str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " "
+            members = msg_contents[3:]
+            json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
+            insertMeeting(json)
+            str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
             for e in newList:
                 str1 = str1 + e + ", "
             str1 = str1[:-2]
