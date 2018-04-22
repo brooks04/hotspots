@@ -43,12 +43,12 @@ def setRoom(content):
     cur.execute('SELECT * FROM Schedule WHERE RoomID = ? AND PersonID = ?', (roomID, personID))
     data = cur.fetchall()
     if len(data) > 0:
-        cur.execute('SELECT * FROM Rooms WHERE ID = ?', (roomID))
+        cur.execute('SELECT * FROM Rooms WHERE ID = ?', (int(roomID)))
         data = cur.fetchone()[2] 
         if data == 0:
-            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (1, RoomID))
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (1, int(roomID)))
         else:
-            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (0, RoomID))
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (0, int(roomID)))
 
 
 def readData():
