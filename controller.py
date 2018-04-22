@@ -51,7 +51,7 @@ def phone():
             json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
             insertMeeting(json)
             str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
-            for e in newList:
+            for e in members:
                 str1 = str1 + e + ", "
             str1 = str1[:-2]
             resp.message(str1)
