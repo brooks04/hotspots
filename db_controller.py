@@ -37,22 +37,33 @@ def readData():
     con = sqlite3.connect('schedule.db')
     cur = con.cursor()
 
+    cur.execute('PRAGMA table_info(People)')
+    dat = cur.fetchall()
+    print(dat)
     cur.execute('SELECT * FROM People')
     dat = cur.fetchall()
-    print(dat[0].keys())
     for row in dat:
         print(row)
 
+    cur.execute('PRAGMA table_info(Rooms)')
+    dat = cur.fetchall()
+    print(dat)
     cur.execute('SELECT * FROM Rooms')
     dat = cur.fetchall()
     for row in dat:
         print(row)    
 
+    cur.execute('PRAGMA table_info(Schedule)')
+    dat = cur.fetchall()
+    print(dat)
     cur.execute('SELECT * FROM Schedule')
     dat = cur.fetchall()
     for row in dat:
         print(row)
 
+    cur.execute('PRAGMA table_info(Notify)')
+    dat = cur.fetchall()
+    print(dat)
     cur.execute('SELECT * FROM Notify')
     dat = cur.fetchall()
     for row in dat:
