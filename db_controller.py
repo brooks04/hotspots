@@ -32,6 +32,22 @@ def removeMeeting(id):
 
     cur.execute('DELETE FROM Schedule WHERE PersonID = ?', (id))
 
+def setRoom(content):
+    print(content, type(content['id']), type(content['room']))
+    personID = content['id']
+    roomID = content['room']
+
+    cur.execute('SELECT * FROM Schedule WHERE RoomID = ? AND PersonID = ?', (personID, roomID))
+    data = cur.fetchall()
+    if len(data) > 0:
+        cur.execute('SELECT * FROM Rooms WHERE RoomID = ?', (roomID))
+        data = cur.fetchone()[2] 
+        if data == 0:
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (1, RoomID))
+        else:
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (0, RoomID))
+
+
 def readData():
     print('Reading Data')
     con = sqlite3.connect('schedule.db')
