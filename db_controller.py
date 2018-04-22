@@ -16,7 +16,7 @@ def insertMeeting(content):
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['RequestTime'], org))
     idList = []
     for person in content['Members']:
-        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%'))
+        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
         idList.append(cur.fetchone())
 
     for pid in idList:
