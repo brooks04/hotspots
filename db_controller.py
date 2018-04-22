@@ -35,12 +35,12 @@ def removeMeeting(id):
 def setRoom(content):
     con = sqlite3.connect('schedule.db')
     cur = con.cursor()
-    
+
     print(content, type(content['id']), type(content['room']))
     personID = content['id']
     roomID = content['room']
 
-    cur.execute('SELECT * FROM Schedule WHERE RoomID = ? AND PersonID = ?', (personID, roomID))
+    cur.execute('SELECT * FROM Schedule WHERE RoomID = ? AND PersonID = ?', (roomID, personID))
     data = cur.fetchall()
     if len(data) > 0:
         cur.execute('SELECT * FROM Rooms WHERE RoomID = ?', (roomID))
