@@ -8,7 +8,7 @@ import json
 import requests
 import sqlite3
 from flask import Flask, request, make_response, Response, jsonify
-from db_controller import insertMeeting, removeMeeting
+from db_controller import insertMeeting, removeMeeting, readData
 from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
@@ -57,6 +57,10 @@ def phone():
         resp.message("The Robots are coming! Head for the hills!")
 
     return str(resp)
+
+@app.route('/read'):
+def read():
+    readData()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

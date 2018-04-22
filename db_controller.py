@@ -12,8 +12,12 @@ def insertMeeting(content):
         cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer']))
 
     org = cur.fetch()
+    scheduleID = random.randrange(2000000)
+    cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime']))
+    for person in content['members']:
+        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, person))
 
-    cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?)', (random.randrange(2000000), 1, content['Time'], content['requestTime']))
+
     con.commit()
 
 def removeMeeting(id):
@@ -21,3 +25,17 @@ def removeMeeting(id):
     cur = con.cursor()
 
     cur.execute('DELETE FROM Schedule WHERE PersonID = ?', (id))
+
+def readData():
+    con = sqlite3.connect('schedule.db')
+    cur = con.cursor()
+
+    cur.execute('SELECT * FROM Schedule')
+    dat = cur.fetchall()
+    for row in data:
+        print(row)
+
+    cur.execute('SELECT * FROM Notify')
+    dat = cur.fetchall()
+    for row in data:
+        print(row)
