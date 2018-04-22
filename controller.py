@@ -39,9 +39,9 @@ def phone():
     print(number, message_body)
     resp = MessagingResponse()
     msg_contents = message_body.split(" ")
-    if (msg_contents[0].lower() == "schedule")
+    if (msg_contents[0].lower() == "schedule"):
         resp.message("How do I schedule stuff?")
-    else
+    else:
         # Add a message
         resp.message("The Robots are coming! Head for the hills!")
 
