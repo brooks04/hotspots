@@ -11,17 +11,17 @@ def insertMeeting(content):
     elif content['Method'] == 'Phone':
         cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer'],))
 
-    org = cur.fetch()
+    # org = cur.fetch()
     scheduleID = random.randrange(2000000)
     cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime']))
-    # for person in content['members']:
-    #     cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, person))
-    if content['Members'][0] == 'team':        
-        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 1))
-        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 2))
-        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 3))
-        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 4))
-        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 5))
+    for person in content['members']:
+        cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, person))
+    #if content['Members'][0] == 'team':        
+    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 1))
+    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 2))
+    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 3))
+    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 4))
+    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 5))
 
 
     con.commit()
