@@ -7,22 +7,22 @@ def insertMeeting(content):
     cur = con.cursor()
 
     if content['Method'] == 'Slack':
+        print('Slack')
         cur.execute('SELECT * FROM People WHERE SlackID = ?', (content['Organizer'],))
     elif content['Method'] == 'Phone':
+        print('Phone')
         cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer'],))
 
-    org = cur.fetchone()
+    org = cur.fetchone()[0]
     scheduleID = random.randrange(2000000)
-    cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['requestTime'], org))
+    cur.execute('INSERT INTO Schedule VALUES (?, ?, ?, ?, ?)', (scheduleID, 1, content['Time'], content['RequestTime'], org))
+    idList = []
     for person in content['Members']:
-        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, person))
-    #if content['Members'][0] == 'team':        
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 1))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 2))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 3))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 4))
-    #    cur.execute('INSERT INTO Schedule VALUES (?, ?)', (scheduleID, 5))
+        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
+        idList.append(int(cur.fetchone()[0]))
 
+    for pid in idList:
+        cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, pid))
 
     con.commit()
 
@@ -36,6 +36,16 @@ def readData():
     print('Reading Data')
     con = sqlite3.connect('schedule.db')
     cur = con.cursor()
+
+    cur.execute('SELECT * FROM People')
+    dat = cur.fetchall()
+    for row in dat:
+        print(row)
+
+    cur.execute('SELECT * FROM Rooms')
+    dat = cur.fetchall()
+    for row in dat:
+        print(row)    
 
     cur.execute('SELECT * FROM Schedule')
     dat = cur.fetchall()

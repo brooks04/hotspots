@@ -27,10 +27,14 @@ def handle_command(command, channel, user):
     # example command
     if command.startswith('!HotSpot'):
         content = command.split(' ')
-        response = "I have scheduled a meeting for " +  content[2] + " with " + content[4]
+        names = []
+        for i in range(4, len(content)):
+            names.append(content[i])
+        response = "I have scheduled a meeting for " +  content[2] + " " + content[3] + " with " + str(names)
 
-        pack = {"Method" : "Slack", "Organizer" : user, "Time" : int(content[2]), "RequestTime" : int(time.time()), "Members" : [content[4]]}
+        pack = {"Method" : "Slack", "Organizer" : user, "Time" : int(content[2]), "RequestTime" : int(time.time()), "Members" : names}
         requests.post('https://iothackhotspots.herokuapp.com/schedule', json=pack)
+
 
     response = "`"  + response + "`"
     
