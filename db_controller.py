@@ -17,7 +17,7 @@ def insertMeeting(content):
     idList = []
     for person in content['Members']:
         cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
-        idList.append(cur.fetchone())
+        idList.append(int(cur.fetchone()[0]))
 
     for pid in idList:
         cur.execute('INSERT INTO Notify VALUES (?, ?)', (scheduleID, person))

@@ -73,7 +73,7 @@ def read():
 @app.route('/checkin',  methods=['GET', 'POST'])
 def checkin():
     content = request.get_json()
-    return jsonify(content)    
+    return jsonify(content)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

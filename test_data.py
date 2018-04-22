@@ -38,6 +38,21 @@ def start():
         #     FOREIGN KEY (PersonID) REFERENCES People(ID))')
 
         # commit changes
+
+        idList = []
+
+        person = 'Alex'
+        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
+        row = cur.fetchone()
+        idList.append(int(row[0]))
+        
+        person = 'Brooke'
+        cur.execute('SELECT * FROM People WHERE Name LIKE ?', ('%' + person +'%',))
+        row = cur.fetchone()
+        idList.append(int(row[0]))
+        
+        print(idList)
+
         con.commit()
         con.close()
 
