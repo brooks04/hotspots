@@ -46,9 +46,9 @@ def setRoom(content):
         cur.execute('SELECT * FROM Rooms WHERE ID = ?', (roomID,))
         data = cur.fetchone()[2] 
         if data == 0:
-            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (1, roomID))
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE ID = ?', (1, roomID))
         else:
-            cur.execute('UPDATE Rooms SET InUse = ? WHERE RoomID = ?', (0, roomID))
+            cur.execute('UPDATE Rooms SET InUse = ? WHERE ID = ?', (0, roomID))
 
 
 def readData():
