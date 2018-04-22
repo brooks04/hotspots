@@ -64,7 +64,7 @@ def phone():
             usernum = number
             if (msg_length > 1):
                 usernum = msg_contents[1]
-            removeMeeting(int(usernum))
+            removeMeeting(usernum)
             resp.message("Meeting removed for user id " + usernum)
         else:
             resp.message(task + " is not a recognized command.")
