@@ -7,9 +7,9 @@ def insertMeeting(content):
     cur = con.cursor()
 
     if content['Method'] == 'Slack':
-        cur.execute('SELECT * FROM People WHERE SlackID = ?', (content['Organizer']))
+        cur.execute('SELECT * FROM People WHERE SlackID = ?', (content['Organizer'],))
     elif content['Method'] == 'Phone':
-        cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer']))
+        cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer'],))
 
     org = cur.fetch()
     scheduleID = random.randrange(2000000)
