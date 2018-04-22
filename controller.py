@@ -42,13 +42,12 @@ def phone():
     msg_length = len(msg_contents)
     if (msg_length > 0 and msg_contents[0].lower() == "schedule"):
         if (msg_length < 4):
-            resp.message("For scheduling meetings, please use the format ",\
-                "\"schedule <time> <meeting length> <member1 member2 ...>\"")
+            resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
         else:
             time = msg_contents[1]
             requestTime = msg_contents[2]
             newList = msg_contents[3:]
-            resp.message("Meeting scheduled for ", time, ".  The meeting length is ", requestTime, ".")
+            resp.message("Meeting scheduled!")
 
 
             
