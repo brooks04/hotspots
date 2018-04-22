@@ -53,7 +53,7 @@ def phone():
                 length = msg_contents[1]
                 requestTime = time.time()
                 members = msg_contents[2:]
-                json = {"Method" : "Phone", "Organizer" : int(number), "Time" : length, "requestTime" : requestTime, "Members" : members}
+                json = {"Method" : "Phone", "Organizer" : int(number), "Time" : length, "RequestTime" : requestTime, "Members" : members}
                 insertMeeting(json)
                 str1 = "Meeting queued! Length Requested = " + length + " Time of Request = " + requestTime + " Members = "
                 for e in members:
