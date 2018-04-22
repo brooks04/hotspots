@@ -58,7 +58,7 @@ def phone():
 
     return str(resp)
 
-@app.route('/read'):
+@app.route('/read')
 def read():
     readData()
 
