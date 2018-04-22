@@ -60,8 +60,12 @@ def phone():
                     str1 = str1 + e + ", "
                 str1 = str1[:-2]
                 resp.message(str1)
-        elif (task == "check"):
-            resp.message("Not Implemented")
+        elif (task == "remove"):
+            usernum = number
+            if (msg_length > 1):
+                usernum = msg_contents[1]
+            removeMeeting(int(usernum))
+            resp.message("Meeting removed for user id " + usernum)
         else:
             resp.message(task + " is not a recognized command.")
     else:
