@@ -41,7 +41,7 @@ def schedule():
         message = client.messages.create(
         to="+1" + str(number), 
         from_="+14252233871",
-        body="You have a meeting in room " + str(resp[1]) + " at " + str(resp[2]))
+        body="You have a meeting in room " + str(resp[1]) + " for " + str(resp[2]) + " mins")
 
     return jsonify(content)
 
