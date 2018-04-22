@@ -6,6 +6,7 @@ Authors: Beebkips
 import os
 import json
 import requests
+import time
 import sqlite3
 from flask import Flask, request, make_response, Response, jsonify
 from db_controller import insertMeeting, removeMeeting, readData
@@ -45,15 +46,15 @@ def phone():
     if (msg_length > 0):
         task = msg_contents[0].lower()
         if (task == "schedule"):
-            if (msg_length < 4):
-                resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
+            if (msg_length < 3):
+                resp.message("For scheduling meetings, please use the format \"schedule <meeting length> <member1 member2 ...>\"")
             else:
-                time = msg_contents[1]
-                requestTime = msg_contents[2]
-                members = msg_contents[3:]
-                json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
+                length = msg_contents[1]
+                requestTime = time.time()
+                members = msg_contents[2:]
+                json = {"Method" : "Phone", "Organizer" : number, "Time" : length, "requestTime" : requestTime, "Members" : members}
                 insertMeeting(json)
-                str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
+                str1 = "Meeting queued! Length Requested = " + length + " Time of Request = " + requestTime + " Members = "
                 for e in members:
                     str1 = str1 + e + ", "
                 str1 = str1[:-2]
