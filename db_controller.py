@@ -54,6 +54,19 @@ def setRoom(content):
     con.commit()
 
 
+def getRoomStatus():
+    con = sqlite3.connect('schedule.db')
+    cur = con.cursor()
+
+    cur.execute('SELECT * FROM Rooms')
+    data = cur.fetchall()
+
+    content = {}
+    for row in data:
+        content[row[1]] = row[2]
+
+    return content
+
 def readData():
     print('Reading Data')
     con = sqlite3.connect('schedule.db')

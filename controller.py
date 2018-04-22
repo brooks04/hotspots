@@ -80,6 +80,11 @@ def checkin():
     setRoom(content)
     return jsonify(content)
 
+@app.route('/rooms', methods=['GET'])
+def rooms():
+    content = getRoomStatus()
+    return jsonify(content)
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
