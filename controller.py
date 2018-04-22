@@ -57,7 +57,7 @@ def phone():
                     str1 = str1 + e + ", "
                 str1 = str1[:-2]
                 resp.message(str1)
-        else if (task == "check")
+        elif (task == "check")
             resp.message(listSchedule())
         #resp.message("How do I schedule stuff?")
     else:
