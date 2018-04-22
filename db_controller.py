@@ -7,8 +7,10 @@ def insertMeeting(content):
     cur = con.cursor()
 
     if content['Method'] == 'Slack':
+        print('Slack')
         cur.execute('SELECT * FROM People WHERE SlackID = ?', (content['Organizer'],))
     elif content['Method'] == 'Phone':
+        print('Phone')
         cur.execute('SELECT * FROM People WHERE PhoneNum = ?', (content['Organizer'],))
 
     org = cur.fetchone()[0]
