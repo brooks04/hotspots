@@ -41,21 +41,24 @@ def phone():
     resp = MessagingResponse()
     msg_contents = message_body.split(" ")
     msg_length = len(msg_contents)
-    if (msg_length > 0 and msg_contents[0].lower() == "schedule"):
-        if (msg_length < 4):
-            resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
-        else:
-            time = msg_contents[1]
-            requestTime = msg_contents[2]
-            members = msg_contents[3:]
-            json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
-            insertMeeting(json)
-            str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
-            for e in members:
-                str1 = str1 + e + ", "
-            str1 = str1[:-2]
-            resp.message(str1)
-            
+    if (msg_length > 0):
+        task = msg_contents[0].lower()
+        if (task == "schedule"):
+            if (msg_length < 4):
+                resp.message("For scheduling meetings, please use the format \"schedule <time> <meeting length> <member1 member2 ...>\"")
+            else:
+                time = msg_contents[1]
+                requestTime = msg_contents[2]
+                members = msg_contents[3:]
+                json = {"Method" : "Phone", "Organizer" : number, "Time" : time, "requestTime" : requestTime, "Members" : members}
+                insertMeeting(json)
+                str1 = "Meeting scheduled! Time = " + time + " Length = " + requestTime + " Members = "
+                for e in members:
+                    str1 = str1 + e + ", "
+                str1 = str1[:-2]
+                resp.message(str1)
+        else if (task == "check")
+            resp.message(listSchedule())
         #resp.message("How do I schedule stuff?")
     else:
         # Add a message

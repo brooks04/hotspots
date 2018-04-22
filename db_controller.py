@@ -46,3 +46,11 @@ def readData():
     dat = cur.fetchall()
     for row in dat:
         print(row)
+
+def listSchedule():
+    print("Returning schedule...")
+    connect = sqlite3.connect('schedule.db')
+    cursor = connect.cursor()
+
+    cursor.execute('SELECT * FROM Schedule')
+    return cursor.fetchall()
